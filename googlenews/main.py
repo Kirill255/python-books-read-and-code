@@ -11,13 +11,10 @@ class Scraper:
         html = r.read()
         soup = BeautifulSoup(html, "html.parser")
         # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#the-string-argument
-        for tag in soup.find_all("a", string=True):
-            url = tag.get("href")
-            if url is None:
+        for a in soup.find_all("a", href=True, string=True):
+            if a["href"].startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
                 continue
-            if url.startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
-                continue
-            print("\n" + url)
+            print("\n" + a["href"])
 
 
 news = "https://news.google.com/"
