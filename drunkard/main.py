@@ -65,6 +65,13 @@ class Deck:
         return self.cards.pop()
 
 
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.card = None  # текущая карта игрока
+        self.wins = 0  # кол-во выигранных раундов
+
+
 deck = Deck()
 for card in deck.cards:
     print(card)
