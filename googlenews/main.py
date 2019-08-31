@@ -11,11 +11,13 @@ class Scraper:
         html = r.read()
         soup = BeautifulSoup(html, "html.parser")
         base = "https://news.google.com/news"
-        # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#the-string-argument
-        for a in soup.find_all("a", href=True, string=True):
-            if a["href"].startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
-                continue
-            print("\n" + base + a["href"].lstrip("."))  # см. сноску внизу
+        with open("output.txt", "w") as f:
+            # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#the-string-argument
+            for a in soup.find_all("a", href=True, string=True):
+                if a["href"].startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
+                    continue
+                print("\n" + base + a["href"].lstrip("."))  # см. сноску внизу
+                f.write(base + a["href"].lstrip(".") + "\n")
 
 
 news = "https://news.google.com/"
