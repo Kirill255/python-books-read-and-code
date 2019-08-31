@@ -10,12 +10,14 @@ class Scraper:
         r = urllib.request.urlopen(self.site)
         html = r.read()
         soup = BeautifulSoup(html, "html.parser")
-        for tag in soup.find_all("a"):
+        # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#the-string-argument
+        for tag in soup.find_all("a", string=True):
             url = tag.get("href")
             if url is None:
                 continue
-            if "html" in url:
-                print("\n" + url)
+            if url.startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
+                continue
+            print("\n" + url)
 
 
 news = "https://news.google.com/"
