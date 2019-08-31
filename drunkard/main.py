@@ -1,3 +1,6 @@
+from random import shuffle
+
+
 class Card:
     # первые два значения None сделаны для удобства, что бы индекс совпадал со значением, values[5] == "5"
     values = [None, None, "2", "3",
@@ -47,9 +50,21 @@ class Card:
         return v
 
 
-card = Card(2, 1)
-card2 = Card(2, 3)
+class Deck:
+    # генерируем 52-карточную колоду и сразу перемешиваем
+    def __init__(self):
+        self.cards = []
+        for i in range(2, 15):  # первое значение 2(двойка), последнее 14(туз)
+            for j in range(4):  # масти от 0 до 3, см. список мастей
+                self.cards.append(Card(i, j))
+        shuffle(self.cards)
 
-print(card)
-print(card2)
-print(card < card2)
+    def rm_card(self):
+        if len(self.cards) == 0:
+            return
+        return self.cards.pop()
+
+
+deck = Deck()
+for card in deck.cards:
+    print(card)
