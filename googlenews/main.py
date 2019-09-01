@@ -1,4 +1,5 @@
 ﻿import urllib.request
+import re
 from bs4 import BeautifulSoup
 
 
@@ -12,10 +13,7 @@ class Scraper:
         soup = BeautifulSoup(html, "html.parser")
         base = "https://news.google.com/news"
         with open("output.txt", "w") as f:
-            # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#the-string-argument
-            for a in soup.find_all("a", href=True, string=True):
-                if a["href"].startswith("http"):  # в выборке попадаются некоторые гугловские ссылки, пропускаем их
-                    continue
+            for a in soup.find_all("a", href=re.compile("./articles/")):
                 print("\n" + base + a["href"].lstrip("."))  # см. сноску внизу
                 f.write(base + a["href"].lstrip(".") + "\n")
 
