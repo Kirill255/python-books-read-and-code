@@ -9,7 +9,7 @@ def check_guess(guess, answer):
     while still_guessing and attempt < 3:
         if guess.lower() == answer.lower():
             print("Correct answer.")
-            score += 1
+            score = score + 3 - attempt
             still_guessing = False
         else:
             if attempt < 2:
