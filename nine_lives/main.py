@@ -1,9 +1,13 @@
 from random import choice
 
-words = ["pizza", "fairy", "teeth", "shirt", "otter", "plane"]  # для удобства у нас все слова из 5 букв
+# для удобства у нас все слова из 5 букв
+words = ["pizza", "fairy", "teeth",
+         "shirt", "otter", "plane",
+         "brush", "horse", "light"
+         ]
 secret_word = choice(words)
 board = list("?????")  # 5шт по кол-ву букв в словах ['?', '?', '?', '?', '?']
-lives = 9
+lives = 12
 heart_symbol = u"\u2764"  # ❤
 guessed_word_correctly = False
 
@@ -20,6 +24,12 @@ def update_clue(guessed_letter, secret_word, board):
 
 
 # запуск программы
+difficulty = int(input("Choose difficulty (type 1, 2, 3):\n 1 Easy\n 2 Normal\n 3 Hard\n"))
+# если пользователь введёт другое число, тогда число жизней останется равно 12
+if 3 >= difficulty >= 1:
+    lives /= difficulty  # 12/1 = 12.0, 12/2 = 6.0, 12/3 = 4.0
+    lives = int(lives)  # потому что после деления получается float число
+
 while lives > 0:
     print(board)  # распечатываем доску
     print("Lives left: " + heart_symbol * lives)  # кол-во жизней
