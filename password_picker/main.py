@@ -14,12 +14,16 @@ nouns = ["apple", "dinosaur", "ball",
          "toaster", "goat", "dragon",
          "hammer", "duck", "panda"
          ]
+while True:
+    adjective = random.choice(adjectives)
+    noun = random.choice(nouns)
+    number = random.randrange(0, 100)
+    sign = random.choice(string.punctuation)  # рандомный знак из строки !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+    # print(string.punctuation)
 
-adjective = random.choice(adjectives)
-noun = random.choice(nouns)
-number = random.randrange(0, 100)
-sign = random.choice(string.punctuation)  # рандомный знак из строки !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-# print(string.punctuation)
+    password = adjective + noun + str(number) + sign
+    print("Your new password is: %s" % password)  # fatpanda56= or fluffyduck16+
 
-password = adjective + noun + str(number) + sign
-print("Your new password is: %s" % password)
+    response = input("Would you like another password? Type y or n: ")
+    if response == "n":
+        break
